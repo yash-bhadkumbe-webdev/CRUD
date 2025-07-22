@@ -1,0 +1,10 @@
+[1mdiff --git a/sever.js b/sever.js[m
+[1mindex 5be36cc..f2d8ea8 100644[m
+[1m--- a/sever.js[m
+[1m+++ b/sever.js[m
+[36m@@ -1 +1,2 @@[m
+[31m-console.log("hello")[m
+\ No newline at end of file[m
+[32m+[m[32mconsole.log("hello")[m
+[32m+[m[32mconsole.log("bhadkumbe")[m
+\ No newline at end of file[m
