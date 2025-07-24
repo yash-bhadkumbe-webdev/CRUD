@@ -3,6 +3,7 @@ const app = express();
 const db = require('./db.js');
 const Person = require('./model');
 const Menue = require('./menue');
+const {response} = require("express");
 
 // Parse JSON bodies (built-in)
 app.use(express.json());
@@ -28,6 +29,19 @@ app.post('/person', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+// App to GET
+
+app.get('/person',async (req,res)=>{
+     try {
+         const data = await Person.find();
+         console.log("data fetched")
+         res.status(200).json(data)
+     }catch (e) {
+         console.log(error);
+         res.status(500).json({ error: 'Internal server error' });
+
+     }
+})
 app.post('/menue',async (req,res)=>{
     try {
         const data =req.body;
@@ -45,7 +59,16 @@ app.post('/menue',async (req,res)=>{
         res.status(500).json({ error: 'Internal server error' });
     }
 })
-
+app.get('/menue',async (req,res)=>{
+    try {
+        const menue = await Menue.find()
+        console.log("menu");
+        res.status(200).json(menue)
+    }catch (error){
+        console.log(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
 app.listen(5000, () => {
     console.log("Listening on port 5000");
 });
