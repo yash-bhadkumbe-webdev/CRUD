@@ -1,15 +1,32 @@
 const express = require('express');
-const {route} = require("express/lib/application");
-const router = express.Router;
-const model = require('./model')
-route.get('/person/:workType',async (req,res)=>{
+const router = express.Router();
+const Person = require('./model')
+//
+router.get('/person/:workType',async (req,res)=>{
     try {
-        const personData = await model.find();
-        console.log("data found it")
-        res.status(200).json(personData);
+        const workType=req.params.workType;
+
+        if (workType=="chef"||workType=="waiter"||workType ="manager"){
+            const response = await Person.find(work:workType)
+        }else {
+            console.log(error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     }catch (e) {
         console.log(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 })
-router.get
+router.post('/person',async (req,res)=>{
+    try {
+        const data = req.body
+        const newPerson = new Person (data)
+        //save data
+        const savedata= await newPerson.save()
+    }catch (e) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
+
+
